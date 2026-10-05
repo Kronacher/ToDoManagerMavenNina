@@ -1,5 +1,7 @@
 package model;
 
+// Domänenobjekte / Model
+
 public class ToDo
 {
 	private final int id;
@@ -24,5 +26,10 @@ public class ToDo
 		", dueDate='" + dueDate + '\'' +
 		", completed=" + completed +
 		'}';
+	}
+
+	public int getId()
+	{
+		return id;
 	}
 }

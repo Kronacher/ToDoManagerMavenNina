@@ -37,5 +37,8 @@
             <version>2.13.2</version>
         </dependency>
     </dependencies>
+    <!-- zum Download der Javadoc:
+		Settings -> Build, Execution, Deployment ->
+		Build Tools -> Maven -> Importing -->
 
 </project>
