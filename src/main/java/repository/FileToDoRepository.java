@@ -43,8 +43,12 @@ public class FileToDoRepository implements ToDoRepository
 		{
 			if (Files.notExists(file))
 			{
-				Files.createDirectories(file.getParent());
-				// Wir schreiben ein leeres Array in die Datei, damit es nicht zu einer Exception kommt wenn wir ToDos laden wollen bevor wir welche erzeugt haben.
+				// Wird in 'file' kein Ordner angegeben, liefert getParent() Null zurück.
+				Path parent = file.getParent();
+				if (parent != null)
+					Files.createDirectories(file.getParent());
+
+				// Wir schreiben ein leeres Array in die Datei, damit es nicht zu einer Exception kommt, wenn wir ToDos laden wollen bevor wir welche erzeugt haben.
 				Files.writeString(file, "[]");
 			}
 		}
@@ -83,7 +87,9 @@ public class FileToDoRepository implements ToDoRepository
 	@Override
 	public void deleteById(int id) throws IOException
 	{
-
+		List<ToDo> all = findAll();
+		all.removeIf(t -> t.getId() == id);
+		writeAll(all);
 	}
 
 	/**
